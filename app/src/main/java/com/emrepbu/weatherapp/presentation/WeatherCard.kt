@@ -15,6 +15,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.emrepbu.weatherapp.presentation.WeatherDataDisplay
+import com.emrepbu.weatherapp.presentation.WeatherState
 import com.emrepbu.weatherapp.R
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
@@ -29,16 +31,20 @@ fun WeatherCard(
         Card(
             backgroundColor = backgroundColor,
             shape = RoundedCornerShape(10.dp),
-            modifier = modifier.padding(16.dp),
+            modifier = modifier.padding(16.dp)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Today ${data.time.format(DateTimeFormatter.ofPattern("HH:mm"))}",
+                    text = "Today ${
+                        data.time.format(
+                            DateTimeFormatter.ofPattern("HH:mm")
+                        )
+                    }",
                     modifier = Modifier.align(Alignment.End),
                     color = Color.White
                 )
@@ -52,13 +58,13 @@ fun WeatherCard(
                 Text(
                     text = "${data.temperatureCelsius}°C",
                     fontSize = 50.sp,
-                    color = Color.White,
+                    color = Color.White
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = data.weatherType.weatherDesc,
                     fontSize = 20.sp,
-                    color = Color.White,
+                    color = Color.White
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 Row(

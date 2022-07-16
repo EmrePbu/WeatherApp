@@ -1,7 +1,5 @@
 package com.emrepbu.weatherapp.data.mappers
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.emrepbu.weatherapp.data.remote.WeatherDataDto
 import com.emrepbu.weatherapp.data.remote.WeatherDto
 import com.emrepbu.weatherapp.domain.weather.WeatherData
@@ -12,7 +10,7 @@ import java.time.format.DateTimeFormatter
 
 private data class IndexedWeatherData(
     val index: Int,
-    val data: WeatherData,
+    val data: WeatherData
 )
 
 fun WeatherDataDto.toWeatherDataMap(): Map<Int, List<WeatherData>> {
@@ -36,9 +34,7 @@ fun WeatherDataDto.toWeatherDataMap(): Map<Int, List<WeatherData>> {
     }.groupBy {
         it.index / 24
     }.mapValues {
-        it.value.map {
-            it.data
-        }
+        it.value.map { it.data }
     }
 }
 
@@ -46,7 +42,7 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
     val weatherDataMap = weatherData.toWeatherDataMap()
     val now = LocalDateTime.now()
     val currentWeatherData = weatherDataMap[0]?.find {
-        val hour = if (now.minute < 30) now.hour else now.hour + 1
+        val hour = if(now.minute < 30) now.hour else now.hour + 1
         it.time.hour == hour
     }
     return WeatherInfo(
